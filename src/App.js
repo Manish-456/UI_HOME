@@ -1,11 +1,28 @@
-import "./App.css";
+import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
+import React, { useState } from "react";
+import { Feed, Navbar, Rightbar, Sidebar } from "./components";
+import Add from "./components/Add";
 
-function App() {
+const App = () => {
+  const [mode , setMode] = useState('light');
+  const darkTheme = createTheme({
+    palette: {
+      mode: mode,
+      
+  }})
   return (
-    <div className="App">
-     <h1>Happy Coding</h1>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <Box bgcolor={'background.default'} color={'text.primary'}>
+      <Navbar />
+      <Stack spacing={2} justifyContent="space-between" direction="row" >
+        <Sidebar setMode={setMode} mode={mode}/>
+        <Feed />
+        <Rightbar />
+      </Stack>
+      <Add />
+    </Box>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
